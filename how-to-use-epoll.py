@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 16-12-24 下午4:09
+# @Author  : Sugare
+# @mail    : 30733705@qq.com
+# @Software: PyCharm
+
 import socket, select       # select module包含epoll功能
 
 EOL1 = b'\n\n'
@@ -51,3 +58,7 @@ finally:
     epoll.unregister(serversocket.fileno())
     epoll.close()
     serversocket.close()
+
+# This article from：http://scotdoyle.com/python-epoll-howto.html
+# If you need to reprint please indicate the article from：https://github.com/sugare/tornado-source-analysis/how-to-use-epoll.py
+   
