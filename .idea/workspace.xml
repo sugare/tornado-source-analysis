@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3d3fbdc4-d3e8-4d04-b739-c3a9a5952a6b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ioloop.py" afterPath="$PROJECT_DIR$/ioloop.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/platform/epoll.py" afterPath="$PROJECT_DIR$/platform/epoll.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util.py" afterPath="$PROJECT_DIR$/util.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,22 +22,90 @@
       <file leaf-file-name="ioloop.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ioloop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="61" column="18" lean-forward="false" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+            <state relative-caret-position="2279">
+              <caret line="766" column="31" lean-forward="true" selection-start-line="766" selection-start-column="31" selection-end-line="766" selection-end-column="31" />
               <folding>
                 <element signature="e#419#499#0" expanded="true" />
-                <element signature="e#16142#29485#0" expanded="false" />
+                <element signature="e#29591#30500#0" expanded="false" />
+                <element signature="e#30539#32336#0" expanded="false" />
+                <element signature="e#30539#30735#1" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/util.py">
+      <file leaf-file-name="epoll.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/platform/epoll.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-630">
+            <state relative-caret-position="494">
+              <caret line="33" column="7" lean-forward="true" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+              <folding>
+                <element signature="e#918#998#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utf8.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/templates/utf8.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kqueue.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/platform/kqueue.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-32">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="posix.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/platform/posix.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="select.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/platform/select.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-587">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#707#787#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+              <folding>
+                <element signature="e#763#843#0" expanded="true" />
+                <element signature="e#976#1040#0" expanded="false" />
+                <element signature="e#1268#1557#0" expanded="false" />
+                <element signature="e#1596#3109#0" expanded="false" />
+                <element signature="e#3816#4809#0" expanded="false" />
+                <element signature="e#4987#5234#0" expanded="false" />
+                <element signature="e#5251#5617#0" expanded="false" />
+                <element signature="e#5654#6116#0" expanded="false" />
+                <element signature="e#8655#10441#0" expanded="false" />
+                <element signature="e#10478#10637#0" expanded="false" />
+                <element signature="e#10684#11468#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,6 +119,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ioloop.py" />
+        <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/platform/epoll.py" />
       </list>
     </option>
   </component>
@@ -92,6 +164,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="github" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="platform" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -336,9 +422,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="24" width="1325" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981132" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24981132" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -366,7 +452,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -377,7 +463,9 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#419#499#0" expanded="true" />
-            <element signature="e#16142#29485#0" expanded="false" />
+            <element signature="e#29591#30500#0" expanded="false" />
+            <element signature="e#30539#32336#0" expanded="false" />
+            <element signature="e#30539#30735#1" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -399,18 +487,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ioloop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="61" column="18" lean-forward="false" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+        <state relative-caret-position="2279">
+          <caret line="766" column="31" lean-forward="true" selection-start-line="766" selection-start-column="31" selection-end-line="766" selection-end-column="31" />
           <folding>
             <element signature="e#419#499#0" expanded="true" />
-            <element signature="e#16142#29485#0" expanded="false" />
+            <element signature="e#29591#30500#0" expanded="false" />
+            <element signature="e#30539#32336#0" expanded="false" />
+            <element signature="e#30539#30735#1" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-630">
+        <state relative-caret-position="45">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+          <folding>
+            <element signature="e#763#843#0" expanded="true" />
+            <element signature="e#976#1040#0" expanded="false" />
+            <element signature="e#1268#1557#0" expanded="false" />
+            <element signature="e#1596#3109#0" expanded="false" />
+            <element signature="e#3816#4809#0" expanded="false" />
+            <element signature="e#4987#5234#0" expanded="false" />
+            <element signature="e#5251#5617#0" expanded="false" />
+            <element signature="e#5654#6116#0" expanded="false" />
+            <element signature="e#8655#10441#0" expanded="false" />
+            <element signature="e#10478#10637#0" expanded="false" />
+            <element signature="e#10684#11468#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/kqueue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/posix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/select.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-587">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#707#787#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/epoll.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="33" column="7" lean-forward="true" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding>
+            <element signature="e#918#998#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/templates/utf8.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>

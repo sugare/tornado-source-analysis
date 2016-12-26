@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 16-12-24 下午4:09
+# @Author  : Sugare
+# @mail    : 30733705@qq.com
+
+# Translated by Sugare
+# If you need to reprint please indicate the article from：https://github.com/sugare/tornado-source-analysis/blob/master/util.py
+
 """Miscellaneous utility functions and classes.
 
 This module is used internally by Tornado.  It is not necessarily expected
@@ -183,24 +192,16 @@ def errno_from_exception(e):
 
 
 class Configurable(object):
-    """Base class for configurable interfaces.
+    """可配置接口的基类。
 
-    A configurable interface is an (abstract) class whose constructor
-    acts as a factory function for one of its implementation subclasses.
-    The implementation subclass as well as optional keyword arguments to
-    its initializer can be set globally at runtime with `configure`.
+    可配置接口是（抽象）类，其构造函数作为其实现子类之一的工厂函数。
+    初始化器的实现子类以及可选的关键字参数可以在运行时通过`configure`来设置。
 
-    By using the constructor as the factory method, the interface
-    looks like a normal class, `isinstance` works as usual, etc.  This
-    pattern is most useful when the choice of implementation is likely
-    to be a global decision (e.g. when `~select.epoll` is available,
-    always use it instead of `~select.select`), or when a
-    previously-monolithic class has been split into specialized
-    subclasses.
+    通过使用构造函数作为工厂方法，接口看起来像一个普通的类，`isinstance`像往常一样工作等。
+    当实现的选择可能是一个全局决定时（例如，当`〜select.epoll`可用时，
+    此模式是最有用的，或者当一个以前的整体类已经被拆分成专门的子类。
 
-    Configurable subclasses must define the class methods
-    `configurable_base` and `configurable_default`, and use the instance
-    method `initialize` instead of ``__init__``.
+    可配置子类必须定义类方法“configurable_base”和“configurable_default”，并使用实例方法`initialize`
     """
     __impl_class = None
     __impl_kwargs = None
@@ -224,34 +225,30 @@ class Configurable(object):
 
     @classmethod
     def configurable_base(cls):
-        """Returns the base class of a configurable hierarchy.
+        """返回可配置层次结构的基类。
 
-        This will normally return the class in which it is defined.
-        (which is *not* necessarily the same as the cls classmethod parameter).
+        这通常返回它被定义的类。 （这是*不*必须与cls classmethod参数相同）。
         """
         raise NotImplementedError()
 
     @classmethod
     def configurable_default(cls):
-        """Returns the implementation class to be used if none is configured."""
+        """返回如果未配置任何配置则要使用的实现类。"""
         raise NotImplementedError()
 
     def initialize(self):
-        """Initialize a `Configurable` subclass instance.
+        """初始化一个`Configurable`子类实例。
 
-        Configurable classes should use `initialize` instead of ``__init__``.
+        可配置类应该使用`initialize`而不是``__init__``。
 
-        .. versionchanged:: 4.2
-           Now accepts positional arguments in addition to keyword arguments.
         """
 
     @classmethod
     def configure(cls, impl, **kwargs):
-        """Sets the class to use when the base class is instantiated.
+        """设置在实例化基类时要使用的类。
 
-        Keyword arguments will be saved and added to the arguments passed
-        to the constructor.  This can be used to set global defaults for
-        some parameters.
+        关键字参数将被保存并添加到传递给构造函数的参数中。
+        这可以用于设置某些参数的全局默认值。
         """
         base = cls.configurable_base()
         if isinstance(impl, (unicode_type, bytes)):
@@ -263,7 +260,7 @@ class Configurable(object):
 
     @classmethod
     def configured_class(cls):
-        """Returns the currently configured class."""
+        "返回当前配置的类。."
         base = cls.configurable_base()
         if cls.__impl_class is None:
             base.__impl_class = cls.configurable_default()

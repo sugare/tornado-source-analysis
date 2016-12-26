@@ -1,5 +1,12 @@
 #!/usr/bin/env python
-#
+# -*- coding: utf-8 -*-
+# @Time    : 16-12-24 下午4:09
+# @Author  : Sugare
+# @mail    : 30733705@qq.com
+
+# Translated by Sugare
+# If you need to reprint please indicate the article from：https://github.com/sugare/tornado-source-analysis/blob/master/platform/epoll.py
+
 # Copyright 2012 Facebook
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -22,5 +29,8 @@ from tornado.ioloop import PollIOLoop
 
 
 class EPollIOLoop(PollIOLoop):
+    """
+    只是将select.epoll()驱动模型函数赋值给impl参数， 传递给PollIOLOOP中
+    """
     def initialize(self, **kwargs):
         super(EPollIOLoop, self).initialize(impl=select.epoll(), **kwargs)

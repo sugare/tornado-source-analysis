@@ -122,11 +122,11 @@ class IOLoop(Configurable):
     ERROR = _EPOLLERR | _EPOLLHUP
 
     # 用于创建全局IOLoop实例的全局锁
-    # 线程加锁机制，防止多进程操作同一个fd，发生数据错乱。
+    # 线程加锁机制，防止多线程操作同一个fd，发生数据错乱。
     _instance_lock = threading.Lock()
 
     # 当前线程中实例化一个全局变量_current,threading.local()有如下特点：
-    # 1. 子线程均可使用threading.local()的实例（_current）,如:A线程可设置任何_instance的变量，如_instance.local,_instance.key1...
+    # 1. 子线程均可使用threading.local()的实例（_current）,如:子线程可设置任何_instance的变量，如_instance.local,_instance.key1...
     # 2. 当前线程生成的子线程，各自子线程中的变量独立，互不影响如:A线程的_instance.local 不同于 B线程中的_instance.local
     # 3. 若当前线程与子线程变量名字相同，如：主线程若也有_instance.local变量，不会覆盖当前线程
     _current = threading.local()
@@ -135,7 +135,7 @@ class IOLoop(Configurable):
     # staticmethod和classmethod:
     # 1. @staticmethod或@classmethod，不需要实例化,所以二者都不需要第一个参数为self，直接类名.方法名()来调用。
     # 2. @staticmethod不需要表示自身对象的self和自身类的cls参数，就跟使用函数一样。但是要调用到这个类的一些属性方法，只能用类名.属性名/方法名。
-    # 3. @classmethod第一个参数必须是自身类的cls参数。由于有cls函数，则调用类的属性方法可直接cls.method或cls.attr,实例的属性方法需要cls().XXX
+    # 3. @classmethod第一个参数必须是自身类的cls参数。由于有cls函数，则调用类的属性方法可直接cls.method/attr,实例的属性方法需要cls().XXX
     @staticmethod
     def instance():
         """返回一个全局`IOLoop`实例。
@@ -152,15 +152,16 @@ class IOLoop(Configurable):
 
     @staticmethod
     def initialized():
-        """Returns true if the singleton instance has been created."""
+        """如果单例子IOLoop被创建，返回True"""
         return hasattr(IOLoop, "_instance")
 
     def install(self):
-        """Installs this `IOLoop` object as the singleton instance.
+        """将此IOLoop对象安装为单例实例。
 
-        This is normally not necessary as `instance()` will create
-        an `IOLoop` on demand, but you may want to call `install` to use
-        a custom subclass of `IOLoop`.
+        这通常不是必要的，因为`instance（）`会创建一个'IOLoop'的需求，
+        但你可能想调用`install`来使用IOLoop的自定义子类。
+        当使用`IOLoop`子类时，必须在创建任何隐式创建自己的`IOLoop`对象之前调用`install`
+        （例如：class：`tornado.httpclient.AsyncHTTPClient`）
         """
         assert not IOLoop.initialized()
         IOLoop._instance = self
@@ -175,14 +176,15 @@ class IOLoop(Configurable):
     @staticmethod
     def current(instance=True):
         """返回当前线程的IOLoop.
-        如果有一个IOLoop当前正在运行（通过查看IOLoop._current是否加入了instance属性），或者已经被make_current标记再当前运行，则返回实例。
+        如果有一个IOLoop当前正在运行（通过查看IOLoop._current是否加入了instance属性），
+        或者已经被make_current标记再当前运行，则返回实例。
         如果当前没有IOLoop，且instance参数为True, 返回IOLoop.instance(),即主线程的IOLoop
 
         一般来说，在构造一个异步对象时，你应该使用`IOLoop.current`作为默认值，
         当你想与不同的主线程通信时使用IOLoop.instance
         """
-        current = getattr(IOLoop._current, "instance", None)
-        if current is None and instance:
+        current = getattr(IOLoop._current, "instance", None)    # 将IOLoop._current下的instance属性的值取出来，
+        if current is None and instance:        # 如果没有值且instance=Ture
             return IOLoop.instance()
         return current
 
@@ -608,7 +610,7 @@ class PollIOLoop(IOLoop):
             return
         old_current = getattr(IOLoop._current, "instance", None)
         IOLoop._current.instance = self
-        self._thread_ident = thread.get_ident()
+        self._thread_ident = thread.get_ident()     # 返回当前线程的'线程标识符',线程标识符可以在线程退出并创建另一个线程时被回收
         self._running = True
 
         # signal.set_wakeup_fd closes a race condition in event loops:
