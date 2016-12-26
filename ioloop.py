@@ -529,11 +529,7 @@ class IOLoop(Configurable):
 
 
 class PollIOLoop(IOLoop):
-    """Base class for IOLoops built around a select-like function.
-
-    For concrete implementations, see `tornado.platform.epoll.EPollIOLoop`
-    (Linux), `tornado.platform.kqueue.KQueueIOLoop` (BSD and Mac), or
-    `tornado.platform.select.SelectIOLoop` (all platforms).
+    """基于类选择函数构建的IOLoops的基类。
     """
     def initialize(self, impl, time_func=None, **kwargs):
         super(PollIOLoop, self).initialize(**kwargs)
@@ -554,14 +550,20 @@ class PollIOLoop(IOLoop):
         self._blocking_signal_threshold = None
         self._timeout_counter = itertools.count()
 
-        # Create a pipe that we send bogus data to when we want to wake
-        # the I/O loop when it is idle
+        # 创建一个管道，当我们想要唤醒I / O循环时，它空闲时发送伪造数据
         self._waker = Waker()
+
+        # self._waker.consume()函数实现了无线循环监听，若有事件触发，读取内容
         self.add_handler(self._waker.fileno(),
                          lambda fd, events: self._waker.consume(),
                          self.READ)
 
     def close(self, all_fds=False):
+        """
+        all_fds=True：关闭所有的之前监控的文件描述符
+        :param all_fds:
+        :return:
+        """
         with self._callback_lock:
             self._closing = True
         self.remove_handler(self._waker.fileno())
@@ -574,15 +576,25 @@ class PollIOLoop(IOLoop):
         self._timeouts = None
 
     def add_handler(self, fd, handler, events):
+        """
+        对套接字fd上的事件监控,换句话说就是如果触发events，通知相关进程（执行对应指令）
+        """
         fd, obj = self.split_fd(fd)
         self._handlers[fd] = (obj, stack_context.wrap(handler))
         self._impl.register(fd, events | self.ERROR)
 
     def update_handler(self, fd, events):
+        """
+        更改套接字上监控的事件
+        """
         fd, obj = self.split_fd(fd)
         self._impl.modify(fd, events | self.ERROR)
 
     def remove_handler(self, fd):
+        """
+        丢弃对fd的事件监控，清楚_headlers中的(fd:obj)键值对
+        以及清除再_events中的对应的fd的键值对
+        """
         fd, obj = self.split_fd(fd)
         self._handlers.pop(fd, None)
         self._events.pop(fd, None)
@@ -613,22 +625,14 @@ class PollIOLoop(IOLoop):
         self._thread_ident = thread.get_ident()     # 返回当前线程的'线程标识符',线程标识符可以在线程退出并创建另一个线程时被回收
         self._running = True
 
-        # signal.set_wakeup_fd closes a race condition in event loops:
-        # a signal may arrive at the beginning of select/poll/etc
-        # before it goes into its interruptible sleep, so the signal
-        # will be consumed without waking the select.  The solution is
-        # for the (C, synchronous) signal handler to write to a pipe,
-        # which will then be seen by select.
-        #
-        # In python's signal handling semantics, this only matters on the
-        # main thread (fortunately, set_wakeup_fd only works on the main
-        # thread and will raise a ValueError otherwise).
-        #
-        # If someone has already set a wakeup fd, we don't want to
-        # disturb it.  This is an issue for twisted, which does its
-        # SIGCHLD processing in response to its own wakeup fd being
-        # written to.  As long as the wakeup fd is registered on the IOLoop,
-        # the loop will still wake up and everything should work.
+        # signal.set_wakeup_fd关闭事件循环中的竞争条件：
+        # 信号可以在它进入其可中断睡眠之前到达select / poll /等的开始，因此信号将在不唤醒的情况下被消耗
+        # 解决方案是将（C，同步）信号处理程序写入管道，然后将被选择看到。
+        # 在python的信号处理语义中，这只在主线程上有意义（幸运的是，set_wakeup_fd只在主线程上工作，否则会引发ValueError')
+        # 如果有人已经设置了唤醒fd，我们不想干扰它。
+        # 这是一个扭曲的问题，它的＃SIGCHLD处理响应自己的唤醒fd被写入。
+        # 只要唤醒fd在IOLoop上注册，循环仍然会醒来，一切都应该工作。
+
         old_wakeup_fd = None
         if hasattr(signal, 'set_wakeup_fd') and os.name == 'posix':
             # requires python 2.6+, unix.  set_wakeup_fd exists but crashes
@@ -648,8 +652,7 @@ class PollIOLoop(IOLoop):
 
         try:
             while True:
-                # Prevent IO event starvation by delaying new callbacks
-                # to the next iteration of the event loop.
+                # 通过将新的回调延迟到事件循环的下一次迭代来防止IO事件饥饿。
                 with self._callback_lock:
                     callbacks = self._callbacks
                     self._callbacks = []

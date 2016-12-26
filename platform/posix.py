@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 16-12-24 下午4:09
+# @Author  : Sugare
+# @mail    : 30733705@qq.com
+
+# Translated by Sugare
+# If you need to reprint please indicate the article from：https://github.com/sugare/tornado-source-analysis/blob/master/platform/interface.py
 #
 # Copyright 2011 Facebook
 #
@@ -25,16 +32,26 @@ from tornado.platform import interface
 
 
 def set_close_exec(fd):
+    """
+    对文件描述符设置相关参数
+    """
     flags = fcntl.fcntl(fd, fcntl.F_GETFD)
     fcntl.fcntl(fd, fcntl.F_SETFD, flags | fcntl.FD_CLOEXEC)
 
 
 def _set_nonblocking(fd):
+    """
+    设置非阻塞
+    """
     flags = fcntl.fcntl(fd, fcntl.F_GETFL)
     fcntl.fcntl(fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)
 
 
 class Waker(interface.Waker):
+    """
+    继承于interface.Waker类，
+    创建一个管道，设置非阻塞等相关操作
+    """
     def __init__(self):
         r, w = os.pipe()
         _set_nonblocking(r)

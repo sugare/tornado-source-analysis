@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 16-12-24 下午4:09
+# @Author  : Sugare
+# @mail    : 30733705@qq.com
+
+# Translated by Sugare
+# If you need to reprint please indicate the article from：https://github.com/sugare/tornado-source-analysis/blob/master/platform/interface.py
 #
 # Copyright 2011 Facebook
 #
@@ -25,39 +32,37 @@ from __future__ import absolute_import, division, print_function, with_statement
 
 
 def set_close_exec(fd):
-    """Sets the close-on-exec bit (``FD_CLOEXEC``)for a file descriptor."""
+    """设置文件描述符的关闭执行位（“FD_CLOEXEC”）"""
     raise NotImplementedError()
 
 
 class Waker(object):
-    """A socket-like object that can wake another thread from ``select()``.
+    """一个类似socket的对象，可以从``select（）``唤醒另一个线程。
 
-    The `~tornado.ioloop.IOLoop` will add the Waker's `fileno()` to
-    its ``select`` (or ``epoll`` or ``kqueue``) calls.  When another
-    thread wants to wake up the loop, it calls `wake`.  Once it has woken
-    up, it will call `consume` to do any necessary per-wake cleanup.  When
-    the ``IOLoop`` is closed, it closes its waker too.
+    `〜tornado.ioloop.IOLoop`将把Waker的`fileno（）`添加到``select``（或``epoll``或``kqueue``）调用中。
+    当另一个线程想唤醒循环时，它调用`wake`。
+    一旦它被唤醒，它将调用`consume`来执行任何必要的每次唤醒清除。
+    当IOLoop关闭时候，waker也关闭。
     """
     def fileno(self):
-        """Returns the read file descriptor for this waker.
+        """返回此waker的读取文件描述符
 
-        Must be suitable for use with ``select()`` or equivalent on the
-        local platform.
+        必须适合在本地平台上使用， 例如``select（）``或等效项。
         """
         raise NotImplementedError()
 
     def write_fileno(self):
-        """Returns the write file descriptor for this waker."""
+        """返回此waker的写入文件描述符。"""
         raise NotImplementedError()
 
     def wake(self):
-        """Triggers activity on the waker's file descriptor."""
+        """监听，触发事件后的进行调用"""
         raise NotImplementedError()
 
     def consume(self):
-        """Called after the listen has woken up to do any necessary cleanup."""
+        """调用后，监听已经醒来的文件描述符，对其做任何必要的清理。"""
         raise NotImplementedError()
 
     def close(self):
-        """Closes the waker's file descriptor(s)."""
+        """关闭激活的文件描述符"""
         raise NotImplementedError()
